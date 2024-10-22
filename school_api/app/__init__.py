@@ -13,7 +13,7 @@ from flask_login import LoginManager, current_user
 
 def create_app():
     app = Flask(__name__)
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:123456@localhost/school'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:yourpassword@my_mysql/school'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['SECRET_KEY'] = 'yug'
     app.config['WTF_CSRF_ENABLED'] = False
