@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}首页 - 校园二手交易平台{% endblock %}
+
+{% block content %}
+<h1 class="mt-4 text-center">二手商品推荐</h1>
+<div class="container">
+    <div class="row">
+        {% for product in products %}
+        <div class="col-md-3 col-sm-6">  <!-- 每行四个商品 -->
+            <div class="card mb-4 shadow-sm">  <!-- 加入底部间距和阴影效果 -->
+                <img src="{{ product.image_url if product.image_url else 'https://via.placeholder.com/150' }}" class="card-img-top product-image" alt="{{ product.name }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ product.name }}</h5>
+                    <p class="card-text">价格：¥{{ product.price }}<br>卖家：{{ product.user.username }}</p>
+<a href="/shop/product/{{ product.id }}" class="btn btn-primary">查看详情</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<style>
+    .product-image {
+        width: 100%;  /* 让图片宽度自适应 */
+        height: 200px;  /* 设置统一高度 */
+        object-fit: cover;  /* 保持图片比例并裁剪 */
+    }
+    .card {
+        border: 1px solid #e0e0e0; /* 边框颜色 */
+        border-radius: 8px; /* 圆角 */
+        transition: transform 0.2s; /* 动效 */
+    }
+    .card:hover {
+        transform: scale(1.05); /* 悬停时放大效果 */
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* 悬停时阴影效果 */
+    }
+</style>
+{% endblock %}

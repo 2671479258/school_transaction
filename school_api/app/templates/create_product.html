@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}发布新商品 - 校园二手交易平台{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1>发布新商品</h1>
+    <form method="POST" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+
+        <div class="mb-3">
+            <label for="name" class="form-label">商品名称</label>
+            {{ form.name(class="form-control") }}
+        </div>
+
+        <div class="mb-3">
+            <label for="price" class="form-label">价格</label>
+            {{ form.price(class="form-control") }}
+        </div>
+
+        <div class="mb-3">
+            <label for="category" class="form-label">类别</label>
+            {{ form.category(class="form-select") }}
+        </div>
+
+        <div class="mb-3">
+            <label for="description" class="form-label">商品描述</label>
+            {{ form.description(class="form-control") }}
+        </div>
+
+        <div class="mb-3">
+            <label for="image" class="form-label">商品图片</label>
+            {{ form.image(class="form-control") }}
+        </div>
+
+        <button type="submit" class="btn btn-primary">发布商品</button>
+    </form>
+</div>
+{% endblock %}

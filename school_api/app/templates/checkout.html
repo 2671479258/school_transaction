@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %}支付前置页{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <!-- 支付前置页 -->
+            <div class="card shadow-sm p-4">
+                <h2 class="card-title text-center">确认购买</h2>
+                <p class="text-center text-muted">请确认以下商品信息</p>
+                <hr>
+
+                <!-- 商品信息 -->
+                <div class="row mb-4">
+                    <div class="col-md-5">
+                        <img src="{{ product.image_url if product.image_url else 'https://via.placeholder.com/500x500' }}" 
+                             class="img-fluid rounded" alt="{{ product.name }} "
+                             style="max-height: 300px; object-fit: cover;">
+                    </div>
+                    <div class="col-md-7">
+                        <h4 class="mb-3">{{ product.name }}</h4>
+                        <p>价格: <span class="fw-bold text-danger">¥{{ product.price }}</span></p>
+                        <p>描述: {{ product.description if product.description else '暂无描述信息。' }}</p>
+                    </div>
+                </div>
+
+                <!-- 卖家信息 -->
+                <h5>卖家信息</h5>
+                <ul class="list-unstyled mb-4">
+                    <li><strong>卖家:</strong> {{ seller.username }}</li>
+                    <li><strong>微信:</strong> {{ seller.weixin }}</li>
+                    <li><strong>电话:</strong> {{ seller.mobile }}</li>
+                </ul>
+
+                <!-- 交易地点输入框 -->
+             <form method="POST" action="{{ url_for('shop.checkout', product_id=product.id) }}">
+    <div class="form-group mb-4">
+        <label for="location">交易地点</label>
+        <input type="text" class="form-control" id="location" name="location" placeholder="请输入交易地点" required>
+    </div>
+
+    <!-- 支付按钮 -->
+    <button type="submit" class="btn btn-primary btn-lg w-100">确认购买并支付</button>
+</form>
+        </div>
+    </div>
+</div>
+{% endblock %}

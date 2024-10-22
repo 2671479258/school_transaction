@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}我的交易记录{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <h2 class="text-center mb-4">我的交易记录</h2>
+
+            {% if transactions %}
+                <div class="list-group">
+                    {% for transaction in transactions %}
+                        <div class="list-group-item">
+                            <h5>订单号: {{ transaction.order_number }}</h5>
+                            <div class="row mb-3">
+                                <div class="col-md-4">
+                                    <img src="{{ transaction.product.image_url if transaction.product.image_url else 'https://via.placeholder.com/150x150' }}"
+                                         class="img-fluid rounded" alt="{{ transaction.product.name }}"
+                                         style="max-height: 150px; object-fit: cover;">
+                                </div>
+                                <div class="col-md-8">
+                                    <p>商品: {{ transaction.product.name }}</p>
+                                    <p>价格: <span class="fw-bold text-danger">¥{{ transaction.product.price }}</span></p>
+                                    <p>交易地点: {{ transaction.location }}</p>
+                                </div>
+                            </div>
+                            <h6>卖家信息</h6>
+                            <p><strong>卖家:</strong> {{ transaction.product.user.username }}</p>
+                            <p><strong>微信:</strong> {{ transaction.product.user.weixin }}</p>
+                            <p><strong>电话:</strong> {{ transaction.product.user.mobile }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="alert alert-info text-center" role="alert">
+                    您还没有任何交易记录。
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
